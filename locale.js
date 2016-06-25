@@ -149,7 +149,10 @@ SnapTranslator.dict.en = {
         'This item could not be exported from Snap!.\n' +
         'It\'s likely that your project may contain a lot of media ' +
         '(sounds and images) or that you are using an older browser.' +
-        'Please try using a recent version of Chrome, Firefox, or Safari.'
+        'Please try using a recent version of Chrome, Firefox, or Safari.',
+
+    'untitled':
+        'Untitled-1'
 };
 
 SnapTranslator.dict.de = {
