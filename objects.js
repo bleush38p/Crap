@@ -2069,6 +2069,8 @@ SpriteMorph.prototype.blockTemplates = function (category) {
         }
 
         blocks.push('-');
+        blocks.push(block('doDeclareVariables'));
+        blocks.push('-');
 
         varNames = this.variables.allNames();
         if (varNames.length > 0) {
@@ -2079,7 +2081,6 @@ SpriteMorph.prototype.blockTemplates = function (category) {
             blocks.push('-');
         }
 
-        blocks.push(block('doDeclareVariables'));
         blocks.push(block('doSetVar'));
         blocks.push(block('doChangeVar'));
         blocks.push(block('doShowVar'));
@@ -5827,11 +5828,13 @@ StageMorph.prototype.blockTemplates = function (category) {
         }
 
         blocks.push('-');
+        blocks.push(block('doDeclareVariables'));
+        blocks.push('-');
 
         varNames = this.variables.allNames();
         if (varNames.length > 0) {
             varNames.forEach(function (name) {
-                blocks.push(variableWatcherToggle(name));
+                // blocks.push(variableWatcherToggle(name));
                 blocks.push(variableBlock(name));
             });
             blocks.push('-');
@@ -5841,7 +5844,6 @@ StageMorph.prototype.blockTemplates = function (category) {
         blocks.push(block('doChangeVar'));
         blocks.push(block('doShowVar'));
         blocks.push(block('doHideVar'));
-        blocks.push(block('doDeclareVariables'));
         blocks.push('=');
         blocks.push(block('reportNewList'));
         blocks.push('-');
