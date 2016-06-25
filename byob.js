@@ -3259,9 +3259,9 @@ VariableDialogMorph.prototype.init = function (target, action, environment) {
     );
 
     // override inherited properites:
-    this.types = new AlignmentMorph('row', this.padding);
-    this.add(this.types);
-    this.createTypeButtons();
+    // this.types = new AlignmentMorph('row', this.padding);
+    // this.add(this.types);
+    // this.createTypeButtons();
 };
 
 VariableDialogMorph.prototype.createTypeButtons = function () {

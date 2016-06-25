@@ -129,10 +129,10 @@ SpriteMorph.prototype.categories =
     ];
 
 SpriteMorph.prototype.blockColor = {
-    // motion : new Color(74, 108, 212),
-    // looks : new Color(143, 86, 227),
+    motion : new Color(74, 108, 212),
+    looks : new Color(143, 86, 227),
     sound : new Color(207, 74, 217),
-    // pen : new Color(0, 161, 120),
+    pen : new Color(0, 161, 120),
     control : new Color(230, 168, 34),
     sensing : new Color(4, 148, 220),
     operators : new Color(98, 194, 19),
@@ -1865,7 +1865,7 @@ SpriteMorph.prototype.blockTemplates = function (category) {
         blocks.push('-');
         blocks.push(block('doBroadcast'));
         blocks.push(block('doBroadcastAndWait'));
-        blocks.push(watcherToggle('getLastMessage'));
+        // blocks.push(watcherToggle('getLastMessage'));
         blocks.push(block('getLastMessage'));
         blocks.push('-');
         blocks.push(block('doWarp'));
@@ -1917,10 +1917,10 @@ SpriteMorph.prototype.blockTemplates = function (category) {
         // blocks.push(block('reportTouchingColor'));
         // blocks.push(block('reportColorIsTouchingColor'));
         // blocks.push('-');
-        blocks.push(block('doAsk'));
-        blocks.push(watcherToggle('getLastAnswer'));
-        blocks.push(block('getLastAnswer'));
-        blocks.push('-');
+        // blocks.push(block('doAsk'));
+        // blocks.push(watcherToggle('getLastAnswer'));
+        // blocks.push(block('getLastAnswer'));
+        // blocks.push('-');
         // blocks.push(watcherToggle('reportMouseX'));
         // blocks.push(block('reportMouseX'));
         // blocks.push(watcherToggle('reportMouseY'));
@@ -1932,7 +1932,7 @@ SpriteMorph.prototype.blockTemplates = function (category) {
         // blocks.push(block('reportDistanceTo'));
         // blocks.push('-');
         blocks.push(block('doResetTimer'));
-        blocks.push(watcherToggle('getTimer'));
+        // blocks.push(watcherToggle('getTimer'));
         blocks.push(block('getTimer'));
         blocks.push('-');
         // blocks.push(block('reportAttributeOf'));
@@ -2026,64 +2026,64 @@ SpriteMorph.prototype.blockTemplates = function (category) {
 
     } else if (cat === 'variables') {
 
-        // button = new PushButtonMorph(
-        //     null,
-        //     function () {
-        //         new VariableDialogMorph(
-        //             null,
-        //             addVar,
-        //             myself
-        //         ).prompt(
-        //             'Variable name',
-        //             null,
-        //             myself.world()
-        //         );
-        //     },
-        //     'Make a variable'
-        // );
-        // button.userMenu = helpMenu;
-        // button.selector = 'addVariable';
-        // button.showHelp = BlockMorph.prototype.showHelp;
-        // blocks.push(button);
+        button = new PushButtonMorph(
+            null,
+            function () {
+                new VariableDialogMorph(
+                    null,
+                    addVar,
+                    myself
+                ).prompt(
+                    'Variable name',
+                    null,
+                    myself.world()
+                );
+            },
+            'Make a variable'
+        );
+        button.userMenu = helpMenu;
+        button.selector = 'addVariable';
+        button.showHelp = BlockMorph.prototype.showHelp;
+        blocks.push(button);
 
-        // if (this.deletableVariableNames().length > 0) {
-        //     button = new PushButtonMorph(
-        //         null,
-        //         function () {
-        //             var menu = new MenuMorph(
-        //                 myself.deleteVariable,
-        //                 null,
-        //                 myself
-        //             );
-        //             myself.deletableVariableNames().forEach(function (name) {
-        //                 menu.addItem(name, name);
-        //             });
-        //             menu.popUpAtHand(myself.world());
-        //         },
-        //         'Delete a variable'
-        //     );
-        //     button.userMenu = helpMenu;
-        //     button.selector = 'deleteVariable';
-        //     button.showHelp = BlockMorph.prototype.showHelp;
-        //     blocks.push(button);
-        // }
+        if (this.deletableVariableNames().length > 0) {
+            button = new PushButtonMorph(
+                null,
+                function () {
+                    var menu = new MenuMorph(
+                        myself.deleteVariable,
+                        null,
+                        myself
+                    );
+                    myself.deletableVariableNames().forEach(function (name) {
+                        menu.addItem(name, name);
+                    });
+                    menu.popUpAtHand(myself.world());
+                },
+                'Delete a variable'
+            );
+            button.userMenu = helpMenu;
+            button.selector = 'deleteVariable';
+            button.showHelp = BlockMorph.prototype.showHelp;
+            blocks.push(button);
+        }
 
-        // blocks.push('-');
+        blocks.push('-');
 
-        // varNames = this.variables.allNames();
-        // if (varNames.length > 0) {
-        //     varNames.forEach(function (name) {
-        //         blocks.push(variableWatcherToggle(name));
-        //         blocks.push(variableBlock(name));
-        //     });
-        //     blocks.push('-');
-        // }
+        varNames = this.variables.allNames();
+        if (varNames.length > 0) {
+            varNames.forEach(function (name) {
+                // blocks.push(variableWatcherToggle(name));
+                blocks.push(variableBlock(name));
+            });
+            blocks.push('-');
+        }
 
+        blocks.push(block('doDeclareVariables'));
         blocks.push(block('doSetVar'));
         blocks.push(block('doChangeVar'));
         blocks.push(block('doShowVar'));
         blocks.push(block('doHideVar'));
-        blocks.push(block('doDeclareVariables'));
 
     // inheritance:
 
@@ -5635,7 +5635,7 @@ StageMorph.prototype.blockTemplates = function (category) {
         blocks.push('-');
         blocks.push(block('doBroadcast'));
         blocks.push(block('doBroadcastAndWait'));
-        blocks.push(watcherToggle('getLastMessage'));
+        // blocks.push(watcherToggle('getLastMessage'));
         blocks.push(block('getLastMessage'));
         blocks.push('-');
         blocks.push(block('doWarp'));
@@ -5681,10 +5681,10 @@ StageMorph.prototype.blockTemplates = function (category) {
 
     } else if (cat === 'sensing') {
 
-        blocks.push(block('doAsk'));
-        blocks.push(watcherToggle('getLastAnswer'));
-        blocks.push(block('getLastAnswer'));
-        blocks.push('-');
+        // blocks.push(block('doAsk'));
+        // blocks.push(watcherToggle('getLastAnswer'));
+        // blocks.push(block('getLastAnswer'));
+        // blocks.push('-');
         // blocks.push(watcherToggle('reportMouseX'));
         // blocks.push(block('reportMouseX'));
         // blocks.push(watcherToggle('reportMouseY'));
@@ -5694,7 +5694,7 @@ StageMorph.prototype.blockTemplates = function (category) {
         blocks.push(block('reportKeyPressed'));
         blocks.push('-');
         blocks.push(block('doResetTimer'));
-        blocks.push(watcherToggle('getTimer'));
+        // blocks.push(watcherToggle('getTimer'));
         blocks.push(block('getTimer'));
         blocks.push('-');
         // blocks.push(block('reportAttributeOf'));
@@ -5790,52 +5790,52 @@ StageMorph.prototype.blockTemplates = function (category) {
 
     } else if (cat === 'variables') {
 
-        // button = new PushButtonMorph(
-        //     null,
-        //     function () {
-        //         new VariableDialogMorph(
-        //             null,
-        //             addVar,
-        //             myself
-        //         ).prompt(
-        //             'Variable name',
-        //             null,
-        //             myself.world()
-        //         );
-        //     },
-        //     'Make a variable'
-        // );
-        // blocks.push(button);
+        button = new PushButtonMorph(
+            null,
+            function () {
+                new VariableDialogMorph(
+                    null,
+                    addVar,
+                    myself
+                ).prompt(
+                    'Variable name',
+                    null,
+                    myself.world()
+                );
+            },
+            'Make a variable'
+        );
+        blocks.push(button);
 
-        // if (this.variables.allNames().length > 0) {
-        //     button = new PushButtonMorph(
-        //         null,
-        //         function () {
-        //             var menu = new MenuMorph(
-        //                 myself.deleteVariable,
-        //                 null,
-        //                 myself
-        //             );
-        //             myself.variables.allNames().forEach(function (name) {
-        //                 menu.addItem(name, name);
-        //             });
-        //             menu.popUpAtHand(myself.world());
-        //         },
-        //         'Delete a variable'
-        //     );
-        //     blocks.push(button);
-        // }
+        if (this.variables.allNames().length > 0) {
+            button = new PushButtonMorph(
+                null,
+                function () {
+                    var menu = new MenuMorph(
+                        myself.deleteVariable,
+                        null,
+                        myself
+                    );
+                    myself.variables.allNames().forEach(function (name) {
+                        menu.addItem(name, name);
+                    });
+                    menu.popUpAtHand(myself.world());
+                },
+                'Delete a variable'
+            );
+            blocks.push(button);
+        }
 
-        // blocks.push('-');
+        blocks.push('-');
 
-        // varNames = this.variables.allNames();
-        // if (varNames.length > 0) {
-        //     varNames.forEach(function (name) {
-        //         blocks.push(variableWatcherToggle(name));
-        //         blocks.push(variableBlock(name));
-        //     });
-        //     blocks.push('-');
-        // }
+        varNames = this.variables.allNames();
+        if (varNames.length > 0) {
+            varNames.forEach(function (name) {
+                blocks.push(variableWatcherToggle(name));
+                blocks.push(variableBlock(name));
+            });
+            blocks.push('-');
+        }
 
         blocks.push(block('doSetVar'));
         blocks.push(block('doChangeVar'));

@@ -811,7 +811,7 @@ IDE_Morph.prototype.createControlBar = function () {
         // );
 
         settingsButton.setCenter(myself.controlBar.center());
-        settingsButton.setLeft(this.left());
+        settingsButton.setLeft(this.left() - settingsButton.width());
 
         // cloudButton.setCenter(myself.controlBar.center());
         // cloudButton.setRight(settingsButton.left() - padding);
@@ -1034,123 +1034,123 @@ IDE_Morph.prototype.createSpriteBar = function () {
     this.spriteBar.color = this.frameColor;
     this.add(this.spriteBar);
 
-    function addRotationStyleButton(rotationStyle) {
-        var colors = myself.rotationStyleColors,
-            button;
+    // function addRotationStyleButton(rotationStyle) {
+    //     var colors = myself.rotationStyleColors,
+    //         button;
 
-        button = new ToggleButtonMorph(
-            colors,
-            myself, // the IDE is the target
-            function () {
-                if (myself.currentSprite instanceof SpriteMorph) {
-                    myself.currentSprite.rotationStyle = rotationStyle;
-                    myself.currentSprite.changed();
-                    myself.currentSprite.drawNew();
-                    myself.currentSprite.changed();
-                }
-                rotationStyleButtons.forEach(function (each) {
-                    each.refresh();
-                });
-            },
-            symbols[rotationStyle], // label
-            function () {  // query
-                return myself.currentSprite instanceof SpriteMorph
-                    && myself.currentSprite.rotationStyle === rotationStyle;
-            },
-            null, // environment
-            localize(labels[rotationStyle])
-        );
+    //     button = new ToggleButtonMorph(
+    //         colors,
+    //         myself, // the IDE is the target
+    //         function () {
+    //             if (myself.currentSprite instanceof SpriteMorph) {
+    //                 myself.currentSprite.rotationStyle = rotationStyle;
+    //                 myself.currentSprite.changed();
+    //                 myself.currentSprite.drawNew();
+    //                 myself.currentSprite.changed();
+    //             }
+    //             rotationStyleButtons.forEach(function (each) {
+    //                 each.refresh();
+    //             });
+    //         },
+    //         symbols[rotationStyle], // label
+    //         function () {  // query
+    //             return myself.currentSprite instanceof SpriteMorph
+    //                 && myself.currentSprite.rotationStyle === rotationStyle;
+    //         },
+    //         null, // environment
+    //         localize(labels[rotationStyle])
+    //     );
 
-        button.corner = 8;
-        button.labelMinExtent = new Point(11, 11);
-        button.padding = 0;
-        button.labelShadowOffset = new Point(-1, -1);
-        button.labelShadowColor = colors[1];
-        button.labelColor = myself.buttonLabelColor;
-        button.fixLayout();
-        button.refresh();
-        rotationStyleButtons.push(button);
-        button.setPosition(myself.spriteBar.position().add(2));
-        button.setTop(button.top()
-            + ((rotationStyleButtons.length - 1) * (button.height() + 2))
-            );
-        myself.spriteBar.add(button);
-        if (myself.currentSprite instanceof StageMorph) {
-            button.hide();
-        }
-        return button;
-    }
+    //     button.corner = 8;
+    //     button.labelMinExtent = new Point(11, 11);
+    //     button.padding = 0;
+    //     button.labelShadowOffset = new Point(-1, -1);
+    //     button.labelShadowColor = colors[1];
+    //     button.labelColor = myself.buttonLabelColor;
+    //     button.fixLayout();
+    //     button.refresh();
+    //     rotationStyleButtons.push(button);
+    //     button.setPosition(myself.spriteBar.position().add(2));
+    //     button.setTop(button.top()
+    //         + ((rotationStyleButtons.length - 1) * (button.height() + 2))
+    //         );
+    //     myself.spriteBar.add(button);
+    //     if (myself.currentSprite instanceof StageMorph) {
+    //         button.hide();
+    //     }
+    //     return button;
+    // }
 
-    addRotationStyleButton(1);
-    addRotationStyleButton(2);
-    addRotationStyleButton(0);
-    this.rotationStyleButtons = rotationStyleButtons;
+    // addRotationStyleButton(1);
+    // addRotationStyleButton(2);
+    // addRotationStyleButton(0);
+    // this.rotationStyleButtons = rotationStyleButtons;
 
-    thumbnail = new Morph();
-    thumbnail.setExtent(thumbSize);
-    thumbnail.image = this.currentSprite.thumbnail(thumbSize);
-    thumbnail.setPosition(
-        rotationStyleButtons[0].topRight().add(new Point(5, 3))
-    );
-    this.spriteBar.add(thumbnail);
+    // thumbnail = new Morph();
+    // thumbnail.setExtent(thumbSize);
+    // thumbnail.image = this.currentSprite.thumbnail(thumbSize);
+    // thumbnail.setPosition(
+    //     rotationStyleButtons[0].topRight().add(new Point(5, 3))
+    // );
+    // this.spriteBar.add(thumbnail);
 
-    thumbnail.fps = 3;
+    // thumbnail.fps = 3;
 
-    thumbnail.step = function () {
-        if (thumbnail.version !== myself.currentSprite.version) {
-            thumbnail.image = myself.currentSprite.thumbnail(thumbSize);
-            thumbnail.changed();
-            thumbnail.version = myself.currentSprite.version;
-        }
-    };
+    // thumbnail.step = function () {
+    //     if (thumbnail.version !== myself.currentSprite.version) {
+    //         thumbnail.image = myself.currentSprite.thumbnail(thumbSize);
+    //         thumbnail.changed();
+    //         thumbnail.version = myself.currentSprite.version;
+    //     }
+    // };
 
-    nameField = new InputFieldMorph(this.currentSprite.name);
-    nameField.setWidth(100); // fixed dimensions
-    nameField.contrast = 90;
-    nameField.setPosition(thumbnail.topRight().add(new Point(10, 3)));
-    this.spriteBar.add(nameField);
-    nameField.drawNew();
-    nameField.accept = function () {
-        var newName = nameField.getValue();
-        myself.currentSprite.setName(
-            myself.newSpriteName(newName, myself.currentSprite)
-        );
-        nameField.setContents(myself.currentSprite.name);
-    };
-    this.spriteBar.reactToEdit = nameField.accept;
+    // nameField = new InputFieldMorph(this.currentSprite.name);
+    // nameField.setWidth(100); // fixed dimensions
+    // nameField.contrast = 90;
+    // nameField.setPosition(thumbnail.topRight().add(new Point(10, 3)));
+    // this.spriteBar.add(nameField);
+    // nameField.drawNew();
+    // nameField.accept = function () {
+    //     var newName = nameField.getValue();
+    //     myself.currentSprite.setName(
+    //         myself.newSpriteName(newName, myself.currentSprite)
+    //     );
+    //     nameField.setContents(myself.currentSprite.name);
+    // };
+    // this.spriteBar.reactToEdit = nameField.accept;
 
-    // padlock
-    padlock = new ToggleMorph(
-        'checkbox',
-        null,
-        function () {
-            myself.currentSprite.isDraggable =
-                !myself.currentSprite.isDraggable;
-        },
-        localize('draggable'),
-        function () {
-            return myself.currentSprite.isDraggable;
-        }
-    );
-    padlock.label.isBold = false;
-    padlock.label.setColor(this.buttonLabelColor);
-    padlock.color = tabColors[2];
-    padlock.highlightColor = tabColors[0];
-    padlock.pressColor = tabColors[1];
+    // // padlock
+    // padlock = new ToggleMorph(
+    //     'checkbox',
+    //     null,
+    //     function () {
+    //         myself.currentSprite.isDraggable =
+    //             !myself.currentSprite.isDraggable;
+    //     },
+    //     localize('draggable'),
+    //     function () {
+    //         return myself.currentSprite.isDraggable;
+    //     }
+    // );
+    // padlock.label.isBold = false;
+    // padlock.label.setColor(this.buttonLabelColor);
+    // padlock.color = tabColors[2];
+    // padlock.highlightColor = tabColors[0];
+    // padlock.pressColor = tabColors[1];
 
-    padlock.tick.shadowOffset = MorphicPreferences.isFlat ?
-            new Point() : new Point(-1, -1);
-    padlock.tick.shadowColor = new Color(); // black
-    padlock.tick.color = this.buttonLabelColor;
-    padlock.tick.isBold = false;
-    padlock.tick.drawNew();
+    // padlock.tick.shadowOffset = MorphicPreferences.isFlat ?
+    //         new Point() : new Point(-1, -1);
+    // padlock.tick.shadowColor = new Color(); // black
+    // padlock.tick.color = this.buttonLabelColor;
+    // padlock.tick.isBold = false;
+    // padlock.tick.drawNew();
 
-    padlock.setPosition(nameField.bottomLeft().add(2));
-    padlock.drawNew();
-    this.spriteBar.add(padlock);
-    if (this.currentSprite instanceof StageMorph) {
-        padlock.hide();
-    }
+    // padlock.setPosition(nameField.bottomLeft().add(2));
+    // padlock.drawNew();
+    // this.spriteBar.add(padlock);
+    // if (this.currentSprite instanceof StageMorph) {
+    //     padlock.hide();
+    // }
 
     // tab bar
     tabBar.tabTo = function (tabString) {
@@ -1184,24 +1184,24 @@ IDE_Morph.prototype.createSpriteBar = function () {
     tab.fixLayout();
     tabBar.add(tab);
 
-    tab = new TabMorph(
-        tabColors,
-        null, // target
-        function () {tabBar.tabTo('costumes'); },
-        localize('Costumes'), // label
-        function () {  // query
-            return myself.currentTab === 'costumes';
-        }
-    );
-    tab.padding = 3;
-    tab.corner = tabCorner;
-    tab.edge = 1;
-    tab.labelShadowOffset = new Point(-1, -1);
-    tab.labelShadowColor = tabColors[1];
-    tab.labelColor = this.buttonLabelColor;
-    tab.drawNew();
-    tab.fixLayout();
-    tabBar.add(tab);
+    // tab = new TabMorph(
+    //     tabColors,
+    //     null, // target
+    //     function () {tabBar.tabTo('costumes'); },
+    //     localize('Costumes'), // label
+    //     function () {  // query
+    //         return myself.currentTab === 'costumes';
+    //     }
+    // );
+    // tab.padding = 3;
+    // tab.corner = tabCorner;
+    // tab.edge = 1;
+    // tab.labelShadowOffset = new Point(-1, -1);
+    // tab.labelShadowColor = tabColors[1];
+    // tab.labelColor = this.buttonLabelColor;
+    // tab.drawNew();
+    // tab.fixLayout();
+    // tabBar.add(tab);
 
     tab = new TabMorph(
         tabColors,
@@ -1518,7 +1518,7 @@ IDE_Morph.prototype.fixLayout = function (situation) {
         this.spriteBar.setPosition(this.logo.bottomRight().add(padding));
         this.spriteBar.setExtent(new Point(
             Math.max(0, this.stage.left() - padding - this.spriteBar.left()),
-            this.categories.bottom() - this.spriteBar.top() - padding
+            22
         ));
         this.spriteBar.fixLayout();
 
@@ -5094,7 +5094,7 @@ ProjectDialogMorph.prototype.buildContents = function () {
         this.srcBar.add(notification);
     }
 
-    this.addSourceButton('cloud', localize('Cloud'), 'cloud');
+    // this.addSourceButton('cloud', localize('Cloud'), 'cloud');
     this.addSourceButton('local', localize('Browser'), 'storage');
     if (this.task === 'open') {
         // this.addSourceButton('examples', localize('Examples'), 'poster');
