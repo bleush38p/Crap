@@ -589,7 +589,7 @@ IDE_Morph.prototype.createControlBar = function () {
     button.fixLayout();
     button.refresh();
     stageSizeButton = button;
-    this.controlBar.add(stageSizeButton);
+    // this.controlBar.add(stageSizeButton);
     this.controlBar.stageSizeButton = button; // for refreshing
 
     //appModeButton
@@ -621,7 +621,7 @@ IDE_Morph.prototype.createControlBar = function () {
     button.fixLayout();
     button.refresh();
     appModeButton = button;
-    this.controlBar.add(appModeButton);
+    // this.controlBar.add(appModeButton);
     this.controlBar.appModeButton = appModeButton; // for refreshing
 
     // stopButton
@@ -782,7 +782,7 @@ IDE_Morph.prototype.createControlBar = function () {
     // button.hint = 'cloud operations';
     button.fixLayout();
     cloudButton = button;
-    this.controlBar.add(cloudButton);
+    // this.controlBar.add(cloudButton);
     this.controlBar.cloudButton = cloudButton; // for menu positioning
 
     this.controlBar.fixLayout = function () {
@@ -801,23 +801,23 @@ IDE_Morph.prototype.createControlBar = function () {
             myself.right() - StageMorph.prototype.dimensions.x *
                 (myself.isSmallStage ? myself.stageRatio : 1)
         );
-        [stageSizeButton, appModeButton].forEach(
-            function (button) {
-                x += padding;
-                button.setCenter(myself.controlBar.center());
-                button.setLeft(x);
-                x += button.width();
-            }
-        );
+        // [stageSizeButton, appModeButton].forEach(
+        //     function (button) {
+        //         x += padding;
+        //         button.setCenter(myself.controlBar.center());
+        //         button.setLeft(x);
+        //         x += button.width();
+        //     }
+        // );
 
         settingsButton.setCenter(myself.controlBar.center());
         settingsButton.setLeft(this.left());
 
-        cloudButton.setCenter(myself.controlBar.center());
-        cloudButton.setRight(settingsButton.left() - padding);
+        // cloudButton.setCenter(myself.controlBar.center());
+        // cloudButton.setRight(settingsButton.left() - padding);
 
         projectButton.setCenter(myself.controlBar.center());
-        projectButton.setRight(cloudButton.left() - padding);
+        projectButton.setRight(settingsButton.left() - padding);
 
         this.updateLabel();
     };
@@ -5097,7 +5097,7 @@ ProjectDialogMorph.prototype.buildContents = function () {
     this.addSourceButton('cloud', localize('Cloud'), 'cloud');
     this.addSourceButton('local', localize('Browser'), 'storage');
     if (this.task === 'open') {
-        this.addSourceButton('examples', localize('Examples'), 'poster');
+        // this.addSourceButton('examples', localize('Examples'), 'poster');
     }
     this.srcBar.fixLayout();
     this.body.add(this.srcBar);
