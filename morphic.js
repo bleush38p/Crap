@@ -1015,7 +1015,7 @@
     canvasses for simple shapes in order to save system resources and
     optimize performance. Examples are costumes and backgrounds in Snap.
     In Morphic you can create new canvas elements using
-    
+
         newCanvas(extentPoint [, nonRetinaFlag])
 
     If retina support is enabled such new canvasses will automatically be
@@ -1385,7 +1385,7 @@ function copy(target) {
     canvasses for simple shapes in order to save system resources and
     optimize performance. Examples are costumes and backgrounds in Snap.
     In Morphic you can create new canvas elements using
-    
+
         newCanvas(extentPoint [, nonRetinaFlag])
 
     If retina support is enabled such new canvasses will automatically be
@@ -1419,7 +1419,7 @@ function enableRetinaSupport() {
 
     NOTE: This implementation is not exhaustive; it only implements what is
     needed by the Snap! UI.
-    
+
     [Jens]: like all other retina screen support implementations I've seen
     Bartosz's patch also does not address putImageData() compatibility when
     mixing retina-enabled and non-retina canvasses. If you need to manipulate
@@ -1539,7 +1539,7 @@ function enableRetinaSupport() {
     contextProto.drawImage = function(image) {
         var pixelRatio = getPixelRatio(image),
             sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight;
-        
+
         // Different signatures of drawImage() method have different
         // parameter assignments.
         switch (arguments.length) {
@@ -4976,7 +4976,7 @@ CursorMorph.prototype.initializeClipboardHandler = function () {
             myself.processKeyDown(event);
             this.value = myself.target.selection();
             this.select();
-            
+
             // Make sure tab prevents default
             if (event.keyIdentifier === 'U+0009' ||
                     event.keyIdentifier === 'Tab') {
@@ -4986,7 +4986,7 @@ CursorMorph.prototype.initializeClipboardHandler = function () {
         },
         false
     );
-    
+
     this.clipboardHandler.addEventListener(
         'input',
         function (event) {
@@ -10367,7 +10367,7 @@ HandMorph.prototype.processDrop = function (event) {
         frd.onloadend = function (e) {
             pic.src = e.target.result;
         };
-        frd.readAsDataURL(aFile);
+        // frd.readAsDataURL(aFile);
     }
 
     function readImage(aFile) {
@@ -10379,13 +10379,13 @@ HandMorph.prototype.processDrop = function (event) {
         pic.onload = function () {
             canvas = newCanvas(new Point(pic.width, pic.height), true);
             canvas.getContext('2d').drawImage(pic, 0, 0);
-            target.droppedImage(canvas, aFile.name);
+            // target.droppedImage(canvas, aFile.name);
         };
         frd = new FileReader();
         frd.onloadend = function (e) {
             pic.src = e.target.result;
         };
-        frd.readAsDataURL(aFile);
+        // frd.readAsDataURL(aFile);
     }
 
     function readAudio(aFile) {
@@ -10445,15 +10445,15 @@ HandMorph.prototype.processDrop = function (event) {
             file = files[i];
             if (file.type.indexOf("svg") !== -1
                     && !MorphicPreferences.rasterizeSVGs) {
-                readSVG(file);
+                // readSVG(file);
             } else if (file.type.indexOf("image") === 0) {
-                readImage(file);
+                // readImage(file);
             } else if (file.type.indexOf("audio") === 0) {
                 readAudio(file);
             } else if (file.type.indexOf("text") === 0) {
                 readText(file);
             } else { // assume it's meant to be binary
-                readBinary(file);
+                // readBinary(file);
             }
         }
     } else if (url) {
@@ -10470,7 +10470,7 @@ HandMorph.prototype.processDrop = function (event) {
             img.onload = function () {
                 canvas = newCanvas(new Point(img.width, img.height), true);
                 canvas.getContext('2d').drawImage(img, 0, 0);
-                target.droppedImage(canvas);
+                // target.droppedImage(canvas);
             };
             img.src = url;
         }
@@ -10482,7 +10482,7 @@ HandMorph.prototype.processDrop = function (event) {
         img.onload = function () {
             canvas = newCanvas(new Point(img.width, img.height), true);
             canvas.getContext('2d').drawImage(img, 0, 0);
-            target.droppedImage(canvas);
+            // target.droppedImage(canvas);
         };
         src = parseImgURL(txt);
         if (src) {img.src = src; }
