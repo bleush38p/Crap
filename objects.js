@@ -116,23 +116,23 @@ SpriteMorph.uber = PenMorph.prototype;
 
 SpriteMorph.prototype.categories =
     [
-        'motion',
+        // 'motion',
         'control',
-        'looks',
+        // 'looks',
         'sensing',
         'sound',
         'operators',
-        'pen',
+        // 'pen',
         'variables',
         'lists',
         'other'
     ];
 
 SpriteMorph.prototype.blockColor = {
-    motion : new Color(74, 108, 212),
-    looks : new Color(143, 86, 227),
+    // motion : new Color(74, 108, 212),
+    // looks : new Color(143, 86, 227),
     sound : new Color(207, 74, 217),
-    pen : new Color(0, 161, 120),
+    // pen : new Color(0, 161, 120),
     control : new Color(230, 168, 34),
     sensing : new Color(4, 148, 220),
     operators : new Color(98, 194, 19),
@@ -1648,7 +1648,7 @@ SpriteMorph.prototype.variableBlock = function (varName) {
 
 SpriteMorph.prototype.blockTemplates = function (category) {
     var blocks = [], myself = this, varNames, button,
-        cat = category || 'motion', txt,
+        cat = category || 'control', txt,
         inheritedVars = this.inheritedVariableNames();
 
     function block(selector) {
@@ -1859,7 +1859,7 @@ SpriteMorph.prototype.blockTemplates = function (category) {
 
         blocks.push(block('receiveGo'));
         blocks.push(block('receiveKey'));
-        blocks.push(block('receiveInteraction'));
+        // blocks.push(block('receiveInteraction'));
         blocks.push(block('receiveCondition'));
         blocks.push(block('receiveMessage'));
         blocks.push('-');
@@ -1904,43 +1904,43 @@ SpriteMorph.prototype.blockTemplates = function (category) {
     */
         blocks.push(block('doCallCC'));
         blocks.push(block('reportCallCC'));
-        blocks.push('-');
-        blocks.push(block('receiveOnClone'));
-        blocks.push(block('createClone'));
-        blocks.push(block('removeClone'));
+        // blocks.push('-');
+        // blocks.push(block('receiveOnClone'));
+        // blocks.push(block('createClone'));
+        // blocks.push(block('removeClone'));
         blocks.push('-');
         blocks.push(block('doPauseAll'));
 
     } else if (cat === 'sensing') {
 
-        blocks.push(block('reportTouchingObject'));
-        blocks.push(block('reportTouchingColor'));
-        blocks.push(block('reportColorIsTouchingColor'));
-        blocks.push('-');
+        // blocks.push(block('reportTouchingObject'));
+        // blocks.push(block('reportTouchingColor'));
+        // blocks.push(block('reportColorIsTouchingColor'));
+        // blocks.push('-');
         blocks.push(block('doAsk'));
         blocks.push(watcherToggle('getLastAnswer'));
         blocks.push(block('getLastAnswer'));
         blocks.push('-');
-        blocks.push(watcherToggle('reportMouseX'));
-        blocks.push(block('reportMouseX'));
-        blocks.push(watcherToggle('reportMouseY'));
-        blocks.push(block('reportMouseY'));
+        // blocks.push(watcherToggle('reportMouseX'));
+        // blocks.push(block('reportMouseX'));
+        // blocks.push(watcherToggle('reportMouseY'));
+        // blocks.push(block('reportMouseY'));
         blocks.push(block('reportMouseDown'));
         blocks.push('-');
         blocks.push(block('reportKeyPressed'));
         blocks.push('-');
-        blocks.push(block('reportDistanceTo'));
-        blocks.push('-');
+        // blocks.push(block('reportDistanceTo'));
+        // blocks.push('-');
         blocks.push(block('doResetTimer'));
         blocks.push(watcherToggle('getTimer'));
         blocks.push(block('getTimer'));
         blocks.push('-');
-        blocks.push(block('reportAttributeOf'));
+        // blocks.push(block('reportAttributeOf'));
 
-        if (SpriteMorph.prototype.enableFirstClass) {
-            blocks.push(block('reportGet'));
-        }
-        blocks.push('-');
+        // if (SpriteMorph.prototype.enableFirstClass) {
+        //     blocks.push(block('reportGet'));
+        // }
+        // blocks.push('-');
 
         blocks.push(block('reportURL'));
         blocks.push('-');
@@ -2026,58 +2026,58 @@ SpriteMorph.prototype.blockTemplates = function (category) {
 
     } else if (cat === 'variables') {
 
-        button = new PushButtonMorph(
-            null,
-            function () {
-                new VariableDialogMorph(
-                    null,
-                    addVar,
-                    myself
-                ).prompt(
-                    'Variable name',
-                    null,
-                    myself.world()
-                );
-            },
-            'Make a variable'
-        );
-        button.userMenu = helpMenu;
-        button.selector = 'addVariable';
-        button.showHelp = BlockMorph.prototype.showHelp;
-        blocks.push(button);
+        // button = new PushButtonMorph(
+        //     null,
+        //     function () {
+        //         new VariableDialogMorph(
+        //             null,
+        //             addVar,
+        //             myself
+        //         ).prompt(
+        //             'Variable name',
+        //             null,
+        //             myself.world()
+        //         );
+        //     },
+        //     'Make a variable'
+        // );
+        // button.userMenu = helpMenu;
+        // button.selector = 'addVariable';
+        // button.showHelp = BlockMorph.prototype.showHelp;
+        // blocks.push(button);
 
-        if (this.deletableVariableNames().length > 0) {
-            button = new PushButtonMorph(
-                null,
-                function () {
-                    var menu = new MenuMorph(
-                        myself.deleteVariable,
-                        null,
-                        myself
-                    );
-                    myself.deletableVariableNames().forEach(function (name) {
-                        menu.addItem(name, name);
-                    });
-                    menu.popUpAtHand(myself.world());
-                },
-                'Delete a variable'
-            );
-            button.userMenu = helpMenu;
-            button.selector = 'deleteVariable';
-            button.showHelp = BlockMorph.prototype.showHelp;
-            blocks.push(button);
-        }
+        // if (this.deletableVariableNames().length > 0) {
+        //     button = new PushButtonMorph(
+        //         null,
+        //         function () {
+        //             var menu = new MenuMorph(
+        //                 myself.deleteVariable,
+        //                 null,
+        //                 myself
+        //             );
+        //             myself.deletableVariableNames().forEach(function (name) {
+        //                 menu.addItem(name, name);
+        //             });
+        //             menu.popUpAtHand(myself.world());
+        //         },
+        //         'Delete a variable'
+        //     );
+        //     button.userMenu = helpMenu;
+        //     button.selector = 'deleteVariable';
+        //     button.showHelp = BlockMorph.prototype.showHelp;
+        //     blocks.push(button);
+        // }
 
-        blocks.push('-');
+        // blocks.push('-');
 
-        varNames = this.variables.allNames();
-        if (varNames.length > 0) {
-            varNames.forEach(function (name) {
-                blocks.push(variableWatcherToggle(name));
-                blocks.push(variableBlock(name));
-            });
-            blocks.push('-');
-        }
+        // varNames = this.variables.allNames();
+        // if (varNames.length > 0) {
+        //     varNames.forEach(function (name) {
+        //         blocks.push(variableWatcherToggle(name));
+        //         blocks.push(variableBlock(name));
+        //     });
+        //     blocks.push('-');
+        // }
 
         blocks.push(block('doSetVar'));
         blocks.push(block('doChangeVar'));
@@ -2087,10 +2087,10 @@ SpriteMorph.prototype.blockTemplates = function (category) {
 
     // inheritance:
 
-        if (StageMorph.prototype.enableInheritance) {
-            blocks.push('-');
-            blocks.push(block('doDeleteAttr'));
-        }
+        // if (StageMorph.prototype.enableInheritance) {
+        //     blocks.push('-');
+        //     blocks.push(block('doDeleteAttr'));
+        // }
 
     ///////////////////////////////
 
@@ -5629,7 +5629,7 @@ StageMorph.prototype.blockTemplates = function (category) {
 
         blocks.push(block('receiveGo'));
         blocks.push(block('receiveKey'));
-        blocks.push(block('receiveInteraction'));
+        // blocks.push(block('receiveInteraction'));
         blocks.push(block('receiveCondition'));
         blocks.push(block('receiveMessage'));
         blocks.push('-');
@@ -5674,8 +5674,8 @@ StageMorph.prototype.blockTemplates = function (category) {
     */
         blocks.push(block('doCallCC'));
         blocks.push(block('reportCallCC'));
-        blocks.push('-');
-        blocks.push(block('createClone'));
+        // blocks.push('-');
+        // blocks.push(block('createClone'));
         blocks.push('-');
         blocks.push(block('doPauseAll'));
 
@@ -5685,10 +5685,10 @@ StageMorph.prototype.blockTemplates = function (category) {
         blocks.push(watcherToggle('getLastAnswer'));
         blocks.push(block('getLastAnswer'));
         blocks.push('-');
-        blocks.push(watcherToggle('reportMouseX'));
-        blocks.push(block('reportMouseX'));
-        blocks.push(watcherToggle('reportMouseY'));
-        blocks.push(block('reportMouseY'));
+        // blocks.push(watcherToggle('reportMouseX'));
+        // blocks.push(block('reportMouseX'));
+        // blocks.push(watcherToggle('reportMouseY'));
+        // blocks.push(block('reportMouseY'));
         blocks.push(block('reportMouseDown'));
         blocks.push('-');
         blocks.push(block('reportKeyPressed'));
@@ -5697,12 +5697,12 @@ StageMorph.prototype.blockTemplates = function (category) {
         blocks.push(watcherToggle('getTimer'));
         blocks.push(block('getTimer'));
         blocks.push('-');
-        blocks.push(block('reportAttributeOf'));
+        // blocks.push(block('reportAttributeOf'));
 
-        if (SpriteMorph.prototype.enableFirstClass) {
-            blocks.push(block('reportGet'));
-        }
-        blocks.push('-');
+        // if (SpriteMorph.prototype.enableFirstClass) {
+        //     blocks.push(block('reportGet'));
+        // }
+        // blocks.push('-');
 
         blocks.push(block('reportURL'));
         blocks.push('-');
@@ -5790,52 +5790,52 @@ StageMorph.prototype.blockTemplates = function (category) {
 
     } else if (cat === 'variables') {
 
-        button = new PushButtonMorph(
-            null,
-            function () {
-                new VariableDialogMorph(
-                    null,
-                    addVar,
-                    myself
-                ).prompt(
-                    'Variable name',
-                    null,
-                    myself.world()
-                );
-            },
-            'Make a variable'
-        );
-        blocks.push(button);
+        // button = new PushButtonMorph(
+        //     null,
+        //     function () {
+        //         new VariableDialogMorph(
+        //             null,
+        //             addVar,
+        //             myself
+        //         ).prompt(
+        //             'Variable name',
+        //             null,
+        //             myself.world()
+        //         );
+        //     },
+        //     'Make a variable'
+        // );
+        // blocks.push(button);
 
-        if (this.variables.allNames().length > 0) {
-            button = new PushButtonMorph(
-                null,
-                function () {
-                    var menu = new MenuMorph(
-                        myself.deleteVariable,
-                        null,
-                        myself
-                    );
-                    myself.variables.allNames().forEach(function (name) {
-                        menu.addItem(name, name);
-                    });
-                    menu.popUpAtHand(myself.world());
-                },
-                'Delete a variable'
-            );
-            blocks.push(button);
-        }
+        // if (this.variables.allNames().length > 0) {
+        //     button = new PushButtonMorph(
+        //         null,
+        //         function () {
+        //             var menu = new MenuMorph(
+        //                 myself.deleteVariable,
+        //                 null,
+        //                 myself
+        //             );
+        //             myself.variables.allNames().forEach(function (name) {
+        //                 menu.addItem(name, name);
+        //             });
+        //             menu.popUpAtHand(myself.world());
+        //         },
+        //         'Delete a variable'
+        //     );
+        //     blocks.push(button);
+        // }
 
-        blocks.push('-');
+        // blocks.push('-');
 
-        varNames = this.variables.allNames();
-        if (varNames.length > 0) {
-            varNames.forEach(function (name) {
-                blocks.push(variableWatcherToggle(name));
-                blocks.push(variableBlock(name));
-            });
-            blocks.push('-');
-        }
+        // varNames = this.variables.allNames();
+        // if (varNames.length > 0) {
+        //     varNames.forEach(function (name) {
+        //         blocks.push(variableWatcherToggle(name));
+        //         blocks.push(variableBlock(name));
+        //     });
+        //     blocks.push('-');
+        // }
 
         blocks.push(block('doSetVar'));
         blocks.push(block('doChangeVar'));
