@@ -1184,24 +1184,24 @@ IDE_Morph.prototype.createSpriteBar = function () {
     tab.fixLayout();
     tabBar.add(tab);
 
-    // tab = new TabMorph(
-    //     tabColors,
-    //     null, // target
-    //     function () {tabBar.tabTo('costumes'); },
-    //     localize('Costumes'), // label
-    //     function () {  // query
-    //         return myself.currentTab === 'costumes';
-    //     }
-    // );
-    // tab.padding = 3;
-    // tab.corner = tabCorner;
-    // tab.edge = 1;
-    // tab.labelShadowOffset = new Point(-1, -1);
-    // tab.labelShadowColor = tabColors[1];
-    // tab.labelColor = this.buttonLabelColor;
-    // tab.drawNew();
-    // tab.fixLayout();
-    // tabBar.add(tab);
+    tab = new TabMorph(
+        tabColors,
+        null, // target
+        function () {tabBar.tabTo('costumes'); },
+        localize('Costumes'), // label
+        function () {  // query
+            return myself.currentTab === 'costumes';
+        }
+    );
+    tab.padding = 3;
+    tab.corner = tabCorner;
+    tab.edge = 1;
+    tab.labelShadowOffset = new Point(-1, -1);
+    tab.labelShadowColor = tabColors[1];
+    tab.labelColor = this.buttonLabelColor;
+    tab.drawNew();
+    tab.fixLayout();
+    tabBar.add(tab);
 
     tab = new TabMorph(
         tabColors,
@@ -1227,7 +1227,7 @@ IDE_Morph.prototype.createSpriteBar = function () {
         each.refresh();
     });
     this.spriteBar.tabBar = tabBar;
-    this.spriteBar.add(this.spriteBar.tabBar);
+    // this.spriteBar.add(this.spriteBar.tabBar);
 
     this.spriteBar.fixLayout = function () {
         this.tabBar.setLeft(this.left());
@@ -1514,7 +1514,7 @@ IDE_Morph.prototype.fixLayout = function (situation) {
         this.spriteBar.setPosition(this.logo.bottomRight().add(padding));
         this.spriteBar.setExtent(new Point(
             Math.max(0, this.stage.left() - padding - this.spriteBar.left()),
-            22
+            0
         ));
         this.spriteBar.fixLayout();
 
