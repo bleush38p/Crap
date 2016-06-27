@@ -120,7 +120,7 @@ SpriteMorph.prototype.categories =
         'control',
         // 'looks',
         'sensing',
-        'sound',
+        // 'sound',
         'operators',
         // 'pen',
         'variables',
