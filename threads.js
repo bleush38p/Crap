@@ -694,6 +694,10 @@ Process.prototype.doReport = function (block) {
     this.pushContext(block.inputs()[0], outer);
 };
 
+Process.prototype.doLog = function (list) {
+    console.log.apply(console, list.contents);
+}
+
 // Process: Non-Block evaluation
 
 Process.prototype.evaluateMultiSlot = function (multiSlot, argCount) {

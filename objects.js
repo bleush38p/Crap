@@ -691,6 +691,11 @@ SpriteMorph.prototype.initBlocks = function () {
             category: 'control',
             spec: 'report %s'
         },
+        doLog: {
+            type: 'command',
+            category: 'control',
+            spec: 'log %exp'
+        },
     /*
         doStopBlock: { // migrated to a newer block version
             type: 'command',
@@ -1881,6 +1886,7 @@ SpriteMorph.prototype.blockTemplates = function (category) {
         blocks.push(block('doIfElse'));
         blocks.push('-');
         blocks.push(block('doReport'));
+        blocks.push(block('doLog'));
         blocks.push('-');
     /*
     // old STOP variants, migrated to a newer version, now redundant
@@ -5652,6 +5658,7 @@ StageMorph.prototype.blockTemplates = function (category) {
         blocks.push(block('doIfElse'));
         blocks.push('-');
         blocks.push(block('doReport'));
+        blocks.push(block('doLog'));
         blocks.push('-');
     /*
     // old STOP variants, migrated to a newer version, now redundant
