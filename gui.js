@@ -1008,7 +1008,7 @@ IDE_Morph.prototype.createStageHandle = function () {
     // assumes that the stage has already been created
     if (this.stageHandle) {this.stageHandle.destroy(); }
     this.stageHandle = new StageHandleMorph(this.stage);
-    this.add(this.stageHandle);
+    // this.add(this.stageHandle);
 };
 
 IDE_Morph.prototype.createSpriteBar = function () {
@@ -1320,7 +1320,7 @@ IDE_Morph.prototype.createCorralBar = function () {
     this.corralBar = new Morph();
     this.corralBar.color = this.frameColor;
     this.corralBar.setHeight(this.logo.height()); // height is fixed
-    this.add(this.corralBar);
+    // this.add(this.corralBar);
 
     // new sprite button
     newbutton = new PushButtonMorph(
@@ -1381,7 +1381,7 @@ IDE_Morph.prototype.createCorral = function () {
 
     this.corral = new Morph();
     this.corral.color = this.groupColor;
-    this.add(this.corral);
+    // this.add(this.corral);
 
     this.corral.stageIcon = new SpriteIconMorph(this.stage);
     this.corral.stageIcon.isDraggable = false;
@@ -1501,14 +1501,10 @@ IDE_Morph.prototype.fixLayout = function (situation) {
     if (situation !== 'refreshPalette') {
         // stage
         if (this.isAppMode) {
-            this.stage.setScale(Math.floor(Math.min(
-                (this.width() - padding * 2) / this.stage.dimensions.x,
-                (this.height() - this.controlBar.height() * 2 - padding * 2)
-                    / this.stage.dimensions.y
-            ) * 10) / 10);
+            this.stage.setScale(0);
             this.stage.setCenter(this.center());
         } else {
-            this.stage.setScale(this.isSmallStage ? this.stageRatio : 1);
+            this.stage.setScale(0);
             this.stage.setTop(this.logo.bottom() + padding);
             this.stage.setRight(this.right());
             this.stageHandle.fixLayout();
@@ -7260,7 +7256,7 @@ StageHandleMorph.prototype.init = function (target) {
             IDE_Morph.prototype.groupColor : new Color(190, 190, 190);
     this.isDraggable = false;
     this.noticesTransparentClick = true;
-    this.setExtent(new Point(12, 50));
+    this.setExtent(new Point(0, 0));
 };
 
 // StageHandleMorph drawing:
