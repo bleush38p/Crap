@@ -280,11 +280,11 @@ SnapTranslator.dict.ru = {
     'language_name':
         'Русский',
     'language_translator':
-        'Svetlana Ptashnaya',
+        'Svetlana Ptashnaya, Проскурнёв Артём',
     'translator_e-mail':
-        'svetlanap@berkeley.edu',
+        'svetlanap@berkeley.edu, tema@school830.ru',
     'last_changed':
-        '2014-09-29'
+        '2016-05-25'
 };
 
 SnapTranslator.dict.es = {
@@ -394,7 +394,7 @@ SnapTranslator.dict.sv = {
     'translator_e-mail':
         'eolsson@gmail.com',
     'last_changed':
-        '2014-12-14'
+        '2016-06-09'
 };
 
 SnapTranslator.dict.pt_BR = {

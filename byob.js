@@ -108,7 +108,7 @@ WatcherMorph, Variable*/
 
 // Global stuff ////////////////////////////////////////////////////////
 
-modules.byob = '2016-June-19';
+modules.byob = '2016-July-04';
 
 // Declarations
 
@@ -1730,6 +1730,15 @@ BlockDialogMorph.prototype.fixLayout = function () {
     }
 };
 
+BlockDialogMorph.prototype.accept = function () {
+    if ((this.body instanceof InputFieldMorph) &&
+            (this.normalizeSpaces(this.body.getValue()) === '')) {
+        this.edit();
+    } else {
+        BlockDialogMorph.uber.accept.call(this);
+    }
+};
+
 // BlockEditorMorph ////////////////////////////////////////////////////
 
 // BlockEditorMorph inherits from DialogBoxMorph:
@@ -2672,6 +2681,7 @@ InputSlotDialogMorph.prototype.init = function (
     this.isExpanded = false;
     this.category = category || 'other';
     this.cachedRadioButton = null; // "template" for radio button backgrounds
+    this.noDelete = false;
 
     // initialize inherited properties:
     BlockDialogMorph.uber.init.call(
@@ -2790,8 +2800,9 @@ InputSlotDialogMorph.prototype.getInput = function () {
         this.fragment.labelString = lbl;
         this.fragment.defaultValue = this.slots.defaultInputField.getValue();
         return lbl;
+    } else if (!this.noDelete) {
+        this.fragment.isDeleted = true;
     }
-    this.fragment.isDeleted = true;
     return null;
 };
 
@@ -2876,6 +2887,8 @@ InputSlotDialogMorph.prototype.open = function (
     this.addButton('ok', 'OK');
     if (!noDeleteButton) {
         this.addButton('deleteFragment', 'Delete');
+    } else {
+        this.noDelete = true;
     }
     this.addButton('cancel', 'Cancel');
     this.fixLayout();
