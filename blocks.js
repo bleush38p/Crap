@@ -149,7 +149,7 @@ isSnapObject, copy, PushButtonMorph, SpriteIconMorph*/
 
 // Global stuff ////////////////////////////////////////////////////////
 
-modules.blocks = '2016-July-05';
+modules.blocks = '2016-July-15';
 
 var SyntaxElementMorph;
 var BlockMorph;
@@ -857,7 +857,8 @@ SyntaxElementMorph.prototype.labelPart = function (spec) {
             part.isUnevaluated = true;
             break;
         case '%txt':
-            part = new InputSlotMorph();
+            part = new InputSlotMorph(); // supports whitespace dots
+            // part = new TextSlotMorph(); // multi-line, no whitespace dots
             part.minWidth = part.height() * 1.7; // "landscape"
             part.fixLayout();
             break;
@@ -3734,6 +3735,9 @@ CommandBlockMorph.prototype.allAttachTargets = function (newParent) {
         answer = [],
         topBlocks;
 
+    if (this instanceof HatBlockMorph && newParent.rejectsHats) {
+        return answer;
+    }
     topBlocks = target.children.filter(function (child) {
         return (child !== myself) &&
             child instanceof SyntaxElementMorph &&
@@ -3771,7 +3775,7 @@ CommandBlockMorph.prototype.closestAttachTarget = function (newParent) {
             }
         );
     }
-    if (!this.isStop()) {
+    if (!bottomBlock.isStop()) {
         ref.push(
             {
                 point: bottomBlock.bottomAttachPoint(),
@@ -5207,6 +5211,7 @@ ScriptsMorph.prototype.init = function (owner) {
     this.owner = owner || null;
     this.feedbackColor = SyntaxElementMorph.prototype.feedbackColor;
     this.feedbackMorph = new BoxMorph();
+    this.rejectsHats = false;
 
     // "undrop" attributes:
     this.lastDroppedBlock = null;
@@ -5738,6 +5743,9 @@ ScriptsMorph.prototype.fixMultiArgs = function () {
 
 ScriptsMorph.prototype.wantsDropOf = function (aMorph) {
     // override the inherited method
+    if (aMorph instanceof HatBlockMorph) {
+        return !this.rejectsHats;
+    }
     return aMorph instanceof SyntaxElementMorph ||
         aMorph instanceof CommentMorph;
 };
@@ -12102,7 +12110,7 @@ ScriptFocusMorph.prototype.deleteLastElement = function () {
 };
 
 ScriptFocusMorph.prototype.insertBlock = function (block) {
-    var pb;
+    var pb, stage, ide;
     block.isTemplate = false;
     block.isDraggable = true;
 
@@ -12165,6 +12173,21 @@ ScriptFocusMorph.prototype.insertBlock = function (block) {
     this.editor.adjustBounds();
     // block.scrollIntoView();
     this.fixLayout();
+
+    // register generic hat blocks
+    if (block.selector === 'receiveCondition') {
+        if (this.editor.owner) {
+            stage = this.editor.owner.parentThatIsA(StageMorph);
+            if (stage) {
+                stage.enableCustomHatBlocks = true;
+                stage.threads.pauseCustomHatBlocks = false;
+                ide = stage.parentThatIsA(IDE_Morph);
+                if (ide) {
+                    ide.controlBar.stopButton.refresh();
+                }
+            }
+        }
+    }
 };
 
 ScriptFocusMorph.prototype.insertVariableGetter = function () {

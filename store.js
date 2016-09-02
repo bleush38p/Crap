@@ -61,7 +61,7 @@ normalizeCanvas*/
 
 // Global stuff ////////////////////////////////////////////////////////
 
-modules.store = '2016-June-17';
+modules.store = '2016-August-03';
 
 
 // XML_Serializer ///////////////////////////////////////////////////////
@@ -1136,7 +1136,7 @@ SnapSerializer.prototype.loadInput = function (model, input, block) {
 
 SnapSerializer.prototype.loadValue = function (model) {
     // private
-    var v, lst, items, el, center, image, name, audio, option, bool,
+    var v, i, lst, items, el, center, image, name, audio, option, bool,
         myself = this;
 
     function record() {
@@ -1269,6 +1269,20 @@ SnapSerializer.prototype.loadValue = function (model) {
                     }
                 }
             }
+        }
+        if (v.expression instanceof BlockMorph) {
+            // bind empty slots to implicit formal parameters
+            i = 0;
+            v.expression.allEmptySlots().forEach(function (slot) {
+                i += 1;
+                if (slot instanceof MultiArgMorph) {
+                    slot.bindingID = ['arguments'];
+                } else {
+                    slot.bindingID = i;
+                }
+            });
+            // and remember the number of detected empty slots
+            v.emptySlots = i;
         }
         el = model.childNamed('receiver');
         if (el) {
@@ -1442,7 +1456,10 @@ Array.prototype.toXML = function (serializer) {
 // Sprites
 
 StageMorph.prototype.toXML = function (serializer) {
-    var thumbnail = this.thumbnail(SnapSerializer.prototype.thumbnailSize),
+    var thumbnail = normalizeCanvas(
+            this.thumbnail(SnapSerializer.prototype.thumbnailSize),
+            true
+        ),
         thumbdata,
         ide = this.parentThatIsA(IDE_Morph);
 
@@ -1657,6 +1674,10 @@ WatcherMorph.prototype.toXML = function (serializer) {
                 this.topLeft().subtract(this.parent.topLeft())
                 : this.topLeft();
 
+    if (this.isTemporary()) {
+        // do not save watchers on temporary variables
+        return '';
+    }
     return serializer.format(
         '<watcher% % style="@"% x="@" y="@" color="@,@,@"%%/>',
         (isVar && this.target.owner) || (!isVar && this.target) ?

@@ -61,7 +61,7 @@
     sound handling
     Achal Dave contributed research and prototyping for creating music
     using the Web Audio API
-    Yuan Yuan contributed graphic effects for costumes
+    Yuan Yuan and Dylan Servilla contributed graphic effects for costumes
 
 */
 
@@ -82,7 +82,7 @@ SpeechBubbleMorph, RingMorph, isNil, FileReader, TableDialogMorph,
 BlockEditorMorph, BlockDialogMorph, PrototypeHatBlockMorph, localize,
 TableMorph, TableFrameMorph, normalizeCanvas, BooleanSlotMorph*/
 
-modules.objects = '2016-July-04';
+modules.objects = '2016-July-19';
 
 var SpriteMorph;
 var StageMorph;
@@ -1597,7 +1597,12 @@ SpriteMorph.prototype.colorFiltered = function (aColor) {
         i,
         dta;
 
-    src = this.image.getContext('2d').getImageData(0, 0, ext.x, ext.y);
+    src = normalizeCanvas(this.image, true).getContext('2d').getImageData(
+        0,
+        0,
+        ext.x,
+        ext.y
+    );
     morph.image = newCanvas(ext, true);
     morph.bounds = this.bounds.copy();
     ctx = morph.image.getContext('2d');
@@ -3618,6 +3623,9 @@ SpriteMorph.prototype.drawLine = function (start, dest) {
 };
 
 SpriteMorph.prototype.floodFill = function () {
+    if (!this.parent.bounds.containsPoint(this.rotationCenter())) {
+        return;
+    }
     var layer = normalizeCanvas(this.parent.penTrails()),
         width = layer.width,
         height = layer.height,
@@ -5316,7 +5324,12 @@ StageMorph.prototype.colorFiltered = function (aColor, excludedSprite) {
         i,
         dta;
 
-    src = img.getContext('2d').getImageData(0, 0, ext.x, ext.y);
+    src = normalizeCanvas(img, true).getContext('2d').getImageData(
+        0,
+        0,
+        ext.x,
+        ext.y
+    );
     morph.bounds = this.bounds.copy();
     morph.image = newCanvas(ext, true);
     ctx = morph.image.getContext('2d');
